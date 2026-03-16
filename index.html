@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Watt Junior Motor</title>
+
+<style>
+/* PAKET */
+
+.paket{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+padding:20px;
+}
+
+.box{
+background:white;
+padding:25px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
+cursor:pointer;
+transition:0.3s;
+}
+
+.box:hover{
+transform:scale(1.05);
+background:#ffe5e5;
+}
+
+/* MODAL */
+
+.modal{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.7);
+
+justify-content:center;
+align-items:center;
+
+z-index:99999;
+}
+
+.modal-content{
+background:white;
+padding:25px;
+width:90%;
+max-width:500px;
+border-radius:12px;
+text-align:center;
+}
+
+.close{
+float:right;
+font-size:28px;
+cursor:pointer;
+}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+/* HEADER */
+
+header{
+background:#000000;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+header h1{
+font-size:42px;
+letter-spacing:3px;
+animation:judulKeren 2s ease;
+text-shadow:0 0 10px rgb(252, 122, 0),0 0 20px rgb(255, 123, 0),0 0 30px rgb(255, 115, 0);
+}
+
+header p{
+animation:subjudul 3s ease;
+}
+
+/* ANIMASI JUDUL */
+
+@keyframes judulKeren{
+0%{
+opacity:0;
+transform:translateY(-80px) scale(0.7);
+}
+60%{
+transform:translateY(10px) scale(1.05);
+}
+100%{
+opacity:1;
+transform:translateY(0) scale(1);
+}
+}
+
+/* ANIMASI SUBJUDUL */
+
+@keyframes subjudul{
+0%{
+opacity:0;
+}
+100%{
+opacity:1;
+}
+}
+header::after{
+content:"";
+display:block;
+width:0;
+height:4px;
+background:#e66f00;
+margin:15px auto 0;
+animation:garisJudul 2s forwards;
+}
+
+@keyframes garisJudul{
+0%{
+width:0;
+}
+100%{
+width:200px;
+}
+}
+
+/* MENU */
+/* ICON HAMBURGER */
+
+.menu-toggle{
+display:none;
+font-size:22px;
+color:white;
+padding:2px 15px;
+cursor:pointer;
+}
+
+/* HAMBURGER */
+
+.menu-toggle{
+display:none;
+font-size:30px;
+color:white;
+padding:10px 20px;
+cursor:pointer;
+}
+
+/* MENU MOBILE */
+
+@media(max-width:768px){
+
+/* HAMBURGER MOBILE MENU */
+
+.menu-toggle{
+display:block;
+}
+
+nav ul{
+position:fixed;
+top:0;
+left:-260px;
+width:260px;
+height:100%;
+background:#ffffff00;
+flex-direction:column;
+padding-top:10px;
+transition:0.4s;
+z-index:999;
+box-shadow:5px 0 15px rgba(0,0,0,0.3);
+}
+
+nav ul li{
+margin:4px;
+}
+
+nav ul li a{
+font-size:18px;
+display:block;
+}
+
+nav ul.active{
+left:0;
+}
+
+}
+
+nav{
+background:#000000;
+position:sticky;
+top:0;
+z-index:999;
+padding:2px 0;
+height:40px;
+display:flex;
+align-items:center;
+}
+
+nav ul{
+display:flex;
+justify-content:center;
+list-style:none;
+}
+
+nav ul li{
+margin:5px;
+}
+
+nav ul li a{
+color:white;
+text-decoration:none;
+font-weight:bold;
+font-size:18px;
+padding:8px 12px;
+transition:0.3s;
+}
+
+nav ul li a:hover{
+background:white;
+color:#e60000;
+border-radius:5px;
+}
+
+/* HERO */
+
+.hero{
+height:80vh;
+background:url("https://s13.gifyu.com/images/bmv1W.png") center/cover no-repeat;
+display:flex;
+align-items:center;
+justify-content:center;
+color:white;
+text-align:center;
+background-size:contain;
+}
+
+.hero h1{
+font-size:50px;
+background:rgba(0,0,0,0.6);
+padding:20px;
+animation:zoomHero 2s ease;
+}
+
+@keyframes zoomHero{
+0%{
+transform:scale(0.7);
+opacity:0;
+}
+100%{
+transform:scale(1);
+opacity:1;
+}
+}
+
+/* SECTION */
+
+section{
+padding:70px 20px;
+text-align:center;
+}
+
+/* SERVIS */
+
+table{
+margin:auto;
+border-collapse:collapse;
+width:80%;
+}
+
+table,th,td{
+border:1px solid #ccc;
+padding:12px;
+}
+
+th{
+background:#ff7b00;
+color:white;
+}
+
+/* KATALOG */
+
+.katalog{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:30px;
+}
+
+.card{
+background:white;
+padding:20px;
+width:230px;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+.card img{
+width:100%;
+height:200px;
+object-fit:contain;
+}
+
+/* GALERI */
+
+.galeri{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+max-width:1100px;
+margin:auto;
+padding:20px;
+}
+
+.galeri img{
+width:100%;
+height:200px;
+object-fit:cover;
+border-radius:10px;
+transition:0.3s;
+}
+
+.galeri img:hover{
+transform:scale(1.05);
+}
+
+/* FORM BOOKING */
+
+.form{
+max-width:500px;
+margin:auto;
+}
+
+input,textarea{
+width:100%;
+padding:12px;
+margin:10px 0;
+border:1px solid #ccc;
+border-radius:6px;
+}
+
+button{
+background:#e60000;
+color:white;
+border:none;
+padding:12px;
+width:100%;
+font-size:18px;
+cursor:pointer;
+}
+
+/* MAP */
+
+iframe{
+width:90%;
+height:400px;
+border:none;
+}
+
+/* WHATSAPP */
+
+.wa{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+color:white;
+padding:15px 20px;
+border-radius:50px;
+text-decoration:none;
+font-size:18px;
+animation:waPulse 2s infinite;
+}
+
+/* INSTAGRAM FLOAT BULAT */
+
+.ig{
+position:fixed;
+bottom:90px;
+right:20px;
+width:55px;
+height:55px;
+background:#E1306C;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+box-shadow:0 0 10px rgba(0,0,0,0.4);
+animation:waPulse 2s infinite;
+}
+
+.ig img{
+width:28px;
+}
+
+@keyframes waPulse{
+0%{transform:scale(1);}
+50%{transform:scale(1.1);}
+100%{transform:scale(1);}
+}
+
+/* FOOTER */
+
+/* OVERLAY BACKGROUND MENU */
+
+.overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.5);
+display:none;
+z-index:998;
+transition:0.3s;
+}
+
+.overlay.active{
+display:block;
+}
+
+footer{
+background:#000;
+color:white;
+text-align:center;
+padding:25px;
+margin-top:40px;
+}
+
+/* RESPONSIVE MOBILE */
+
+@media(max-width:768px){
+
+header h1{
+font-size:28px;
+}
+
+.hero{
+height:50vh;
+background-size:contain;
+}
+
+.hero h1{
+font-size:28px;
+padding:15px;
+}
+
+nav ul{
+flex-direction:column;
+}
+
+nav ul li{
+margin:8px;
+}
+
+table{
+width:100%;
+}
+
+.card{
+width:90%;
+}
+
+iframe{
+width:100%;
+height:300px;
+}
+
+}
+
+/* POPUP FOTO */
+
+.popup{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.9);
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+
+.popup img{
+max-width:90%;
+max-height:80%;
+border-radius:10px;
+}
+
+.tutup{
+position:absolute;
+top:30px;
+right:40px;
+font-size:40px;
+color:white;
+cursor:pointer;
+}
+
+/* OVERLAY MENU */
+
+.overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.5);
+display:none;
+z-index:998;
+transition:0.3s;
+}
+
+.overlay.active{
+display:block;
+}
+
+/* RUNNING TEXT STICKY */
+
+.running-text{
+border-top:1px solid #000000;
+margin-top:0;
+position:sticky;
+top:40px;
+width:100%;
+background:#050505;
+color:white;
+overflow:hidden;
+white-space:nowrap;
+padding:10px 0;
+font-weight:bold;
+z-index:998;
+}
+
+.running-content{
+display:inline-block;
+padding-left:100%;
+animation:runningText 18s linear infinite;
+}
+
+@keyframes runningText{
+
+0%{
+transform:translateX(0);
+}
+
+100%{
+transform:translateX(-100%);
+}
+
+}
+
+</style>
+
+</head>
+
+<body>  
+
+<header id="home">
+<h1>WATT JUNIOR MOTOR</h1>
+
+</header>
+
+<nav>
+
+<div class="menu-toggle" onclick="toggleMenu()">
+☰ 
+</div>
+
+<ul id="menu">
+
+<li><a href="#home" onclick="toggleMenu()">Home</a></li>
+<li><a href="#servis" onclick="toggleMenu()">Daftar Harga</a></li>
+<li><a href="#galeri" onclick="toggleMenu()">Galeri</a></li>
+<li><a href="#booking" onclick="toggleMenu()">Booking</a></li>
+<li><a href="#lokasi" onclick="toggleMenu()">Lokasi</a></li>
+
+</ul>
+
+</nav>
+
+<div class="running-text">
+<div class="running-content">
+🔥 WATT JUNIOR MOTOR 🔥 | 
+SERVICE | 
+BOR UP  | 
+TUNE UP |
+PAKET KIRIAN |
+REMAPPING ECU STD & BRT | 
+SCANNING  |
+SPAREPART LENGKAP
+</div>
+</div>
+
+<div id="overlay" class="overlay" onclick="toggleMenu()"></div>
+
+<!-- HERO -->
+
+<section class="hero">
+
+
+
+</section>
+
+<!-- SERVIS -->
+
+<section id="servis">
+
+    <br>
+    <br>
+
+<h2>DAFTAR HARGA</h2>
+
+<div class="paket">
+
+<div class="box" onclick="openPaket('paket58')">
+<h3>Service TB / Karbu</h3>
+<p>Klik untuk lihat detail</p>
+</div>
+
+<div class="box" onclick="openPaket('paket60')">
+<h3>Service CVT</h3>
+<p>Klik untuk lihat detail</p>
+</div>
+
+<div class="box" onclick="openPaket('paket62')">
+<h3>Paket Bor Up</h3>
+<p>Klik untuk lihat detail</p>
+</div>
+
+<div class="box" onclick="openPaket('paketservis')">
+<h3>Paket Kirian</h3>
+<p>Klik untuk lihat detail</p>
+</div>
+
+</div>
+
+</section>
+<!-- MODAL -->
+
+<div id="modal" class="modal">
+
+<div class="modal-content">
+
+<span class="close" onclick="closeModal()">&times;</span>
+
+<div id="detail"></div>
+
+</div>
+
+</div>
+<br>
+
+</section>
+
+<!-- KATALOG -->
+
+<!-- GALERI -->
+
+<section id="galeri">
+
+    <br>
+    <br>
+
+<h2>DOKUMENTASI</h2>
+
+<br>
+
+<div class="galeri">
+
+<img src="https://s13.gifyu.com/images/bmvGE.jpg">
+<img src="https://s13.gifyu.com/images/bmvGv.jpg">
+<img src="https://s13.gifyu.com/images/bmvGm.jpg">
+<img src="https://s13.gifyu.com/images/bmvGW.jpg">
+<img src="https://s13.gifyu.com/images/bmvGO.jpg">
+<img src="https://s13.gifyu.com/images/bmqLS.jpg">
+<img src="https://s13.gifyu.com/images/bmqL3.jpg">
+<img src="https://s13.gifyu.com/images/bmqL8.jpg">
+<img src="https://s13.gifyu.com/images/bmqL0.jpg">
+<img src="https://s13.gifyu.com/images/bmqLU.jpg">
+<img src="https://s13.gifyu.com/images/bmqLa.jpg">
+<img src="https://s13.gifyu.com/images/bmqLY.jpg">
+<img src="https://s13.gifyu.com/images/bmqL5.jpg">
+
+</div>
+
+</section>
+
+<!-- POPUP FOTO -->
+
+<div id="popup" class="popup">
+<span class="tutup">&times;</span>
+<img id="popup-img">
+</div>
+
+<!-- BOOKING -->
+
+<section id="booking">
+
+    <br>
+    <br>
+<h2>Booking & Konsultasi</h2>
+
+<br>
+
+<div class="form">
+
+<input type="text" id="nama" placeholder="Nama">
+
+<input type="text" id="motor" placeholder="Jenis Motor">
+
+<textarea id="pesan" placeholder="Keluhan Motor"></textarea>
+
+<button onclick="kirim()">Booking via WhatsApp</button>
+
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+</section>
+
+<!-- MAP -->
+
+<section id="lokasi">
+
+    <br>
+    <br>
+    <br>
+
+<h2>Lokasi Bengkel</h2>
+
+<br>
+
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.774057169039!2d106.63024471001866!3d-6.16100749380044!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f8b65c563739%3A0xcae32024e90e048b!2sBengkel%20Motor%20WJM!5e0!3m2!1sid!2skh!4v1773576944925!5m2!1sid!2skh" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+</section>
+
+<footer>
+
+<p>© 2026 Watt Junior Motor</p>
+
+</footer>
+
+<a class="wa" href="https://wa.me/6281295651447">
+WhatsApp
+</a>
+
+<a class="ig" href="https://instagram.com/wattjuniormotor" target="_blank">
+<img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png">
+</a>
+
+<script>
+
+function kirim(){
+
+var nama=document.getElementById("nama").value
+var motor=document.getElementById("motor").value
+var pesan=document.getElementById("pesan").value
+
+var url="https://wa.me/6281295651447?text="
++"Nama: "+nama+"%0a"
++"Motor: "+motor+"%0a"
++"Keluhan: "+pesan
+
+window.open(url)
+
+}
+
+</script>
+<script>
+
+function openPaket(paket){
+
+var detail="";
+
+if(paket=="paket58"){
+
+detail=`
+<h2>Service TB / Karbu</h2>
+
+<ul>
+<li>Motor Kecil 65.000</li>
+<li>Matic Besar (NMAX,PCX,AEROX,LEXY,V160) 75.000</li>
+<li>Motor Besar 2silinder 150.000</li>
+
+Note : Harga tidak termasuk ganti part , info lengkap bisa langsung datang ke bengkel atau hubungi kontak yang tersedia
+</ul>
+
+`;
+
+}
+
+if(paket=="paket60"){
+
+detail=`
+<h2>Service CVT</h2>
+
+<ul>
+<li>Motor Kecil <200cc 60.000</li>
+Note : Harga tidak termasuk ganti part , info lengkap bisa langsung datang ke bengkel atau hubungi kontak yang tersedia
+
+</ul>
+
+`;
+
+}
+
+if(paket=="paket62"){
+
+detail=`
+<h2>Paket Bor Up </h2>
+
+<ul>
+<li>Paket Harian</li>
+<li>Paket Touring</li>
+<li>Paket Balap</li>
+
+</ul>
+
+<h3>Detail paket dan harga hubungi Admin</h3>
+`;
+
+}
+
+if(paket=="paketservis"){
+
+detail=`
+<h2>Paket Kirian</h2>
+
+<ul>
+<li>Rumah Roller</li>
+<li>Kerok Jalur Roller</li>
+<li>Roller</li>
+<li>Per Sentri</li>
+<li>Per Pully</li>
+<li>Kampas & Mangkok Ganda</li>
+</ul>
+
+<h3>Detail paket dan harga hubungi Admin</h3>
+`;
+
+}
+
+document.getElementById("detail").innerHTML=detail;
+document.getElementById("modal").style.display="flex";
+
+}
+
+function closeModal(){
+document.getElementById("modal").style.display="none";
+
+}
+
+</script>
+
+<script>
+
+var galeri=document.querySelectorAll(".galeri img");
+var popup=document.getElementById("popup");
+var popupImg=document.getElementById("popup-img");
+var tutup=document.querySelector(".tutup");
+
+galeri.forEach(function(img){
+
+img.onclick=function(){
+
+popup.style.display="flex";
+popupImg.src=this.src;
+
+}
+
+})
+
+tutup.onclick=function(){
+
+popup.style.display="none";
+
+}
+
+popup.onclick=function(){
+
+popup.style.display="none";
+
+}
+
+</script>
+
+<script>
+
+function toggleMenu(){
+
+var menu = document.getElementById("menu");
+var overlay = document.getElementById("overlay");
+
+menu.classList.toggle("active");
+overlay.classList.toggle("active");
+
+}
+
+</script>
+
+<script>
+
+function toggleMenu(){
+
+var menu=document.getElementById("menu");
+var overlay=document.getElementById("overlay");
+
+menu.classList.toggle("active");
+overlay.classList.toggle("active");
+
+}
+
+</script>
+
+</body>
+</html>

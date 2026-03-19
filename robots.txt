@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://wattjuniormotor.github.io/wjmofficial/sitemap.xml
